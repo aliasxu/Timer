@@ -32,3 +32,17 @@ def custom():
             return redirect(url_for(type[times[-1]],num=int(times[:-1])))
     return redirect(url_for('index',form=form))
 
+
+@app.route('/<int:num>m')
+def minutes(num):
+    return redirect(url_for('timer',num=num*60))
+
+@app.route('<int:num>h')
+def hours(num):
+    return redirect(url_for('timer',num=num*3600))
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    flash(u'访问地址错误')
+    return redirect(url_for('timer',num=250))
